@@ -1,10 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const getBasketFromStorage = () => {
-    if (localStorage.getItem("basket")) {
-        return JSON.parse(localStorage.getItem("basket"));
+    if (typeof window === "undefined") return [];
+
+    const basket = localStorage.getItem("basket");
+    if (!basket) return [];
+
+    try {
+        return JSON.parse(basket);
+    } catch {
+        return [];
     }
-    return [];
 }
 
 const initialState = {
@@ -12,6 +18,7 @@ const initialState = {
 }
 
 const writeFromBasketToStorage = (basket) => {
+    if (typeof window === "undefined") return;
     localStorage.setItem("basket", JSON.stringify(basket));
 }
 
@@ -22,19 +29,20 @@ export const basketSlice = createSlice({
     initialState,
     reducers: {
         addToBasket: (state, action) => {
-            products && products.map((product) => {
-                const findProduct = products && products.find((product) => product.id === action.payload.id);
-                if (findProduct) {
+            const findProduct = state.products.find(
+                (product) => String(product.id) === String(action.payload.id)
+            );
 
-                } else {
-                    state.products = [...state.products, action.payload];
-                    writeFromBasketToStorage(state.products);
-                }
-            })
+            if (findProduct) {
+                findProduct.count = (findProduct.count || 1) + 1;
+            } else {
+                state.products.push({ ...action.payload, count: 1 });
+            }
 
-        }
+            writeFromBasketToStorage(current(state.products));
+        },
     },
 })
 
-export const { } = basketSlice.actions
+export const { addToBasket } = basketSlice.actions
 export default basketSlice.reducer

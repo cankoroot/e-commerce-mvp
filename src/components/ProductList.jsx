@@ -1,15 +1,15 @@
-import React, { use } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../redux/slices/productSlice'
 import { useNavigate } from 'react-router-dom';
+import { addToBasket } from '../redux/slices/basketSlice';
 
 function ProductList() {
 
     const dispatch = useDispatch();
     const { products } = useSelector((store) => store.product);
     const navigate = useNavigate();
-    const { selectedProduct } = useSelector((store) => store.product);
 
     useEffect(() => {
         dispatch(getAllProducts())
@@ -30,7 +30,22 @@ function ProductList() {
                         >
                             İncele
                         </button>
-                        <button className='product-btn2'>Sepete Ekle</button>
+                        <button
+                            className='product-btn2'
+                            onClick={() =>
+                                dispatch(
+                                    addToBasket({
+                                        id: product.id,
+                                        price: product.price,
+                                        title: product.title,
+                                        description: product.description,
+                                        image: product.image,
+                                    })
+                                )
+                            }
+                        >
+                            Sepete Ekle
+                        </button>
                     </div>
                 </div>
             ))}
