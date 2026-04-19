@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Product() {
+function Product(product) {
+    const { id, title, image, description, price } = product;
     return (
         <div>
-            <div className='main'>
-            </div>
+
         </div>
     )
 }

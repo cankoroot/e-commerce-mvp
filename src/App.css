@@ -3,11 +3,22 @@
   padding: 0px;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.app-shell {
+  min-height: 100%;
+  background-color: var(--bg);
+}
+
 .header-hero {
   width: 100%;
   height: 70px;
-  background-color: rgb(45, 45, 45);
-  box-shadow: 0px 2px 50px rgba(255, 255, 255, 0.1);
+  background-color: var(--surface);
+  box-shadow: 0px 2px 50px var(--surface-shadow);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,21 +45,37 @@
 .header-link {
   color: var(--text-h);
   text-decoration: none;
-  background-color: rgb(59, 59, 59);
+  background-color: var(--chip-bg);
   border-radius: 20px;
   padding: 0px 20px;
 }
 
 .link {
   text-decoration: none;
-  background-color: rgb(59, 59, 59);
+  background-color: var(--chip-bg);
   border-radius: 4px;
   padding: 6px 12px;
-  color: white;
+  color: var(--chip-text);
   font-weight: 300;
   align-items: center;
   justify-content: center;
   margin: 0 6px;
+}
+
+.theme-toggle-btn {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-left: 6px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .main {
@@ -58,13 +85,170 @@
 .footer-container {
   width: 100%;
   height: 60px;
-  background-color: rgb(45, 45, 45);
-  box-shadow: 0px -2px 50px rgba(255, 255, 255, 0.1);
+  background-color: var(--surface);
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 1000;
+  vertical-align: bottom;
+  margin-bottom: -60px;
+}
+
+.about {
+  cursor: pointer;
+  color: var(--text-h);
+}
+
+.footer-text,
+.footer-link {
+  color: var(--text-h);
+}
+
+.footer-link {
+  text-decoration: underline;
+}
+
+.search-container {
+  border: none;
+  display: flex;
+  background-color: transparent;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 400px;
+  outline: none;
+}
+
+.search-input {
+  border: 1px solid var(--border);
+  background-color: transparent;
+  padding: 10px 20px;
+  margin-right: 16px;
+}
+
+.cart-icon {
+  font-size: 30px;
+}
+
+.image {
+  width: 100px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.product-list-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.card {
+  width: 250px;
+  height: 450px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--surface);
+}
+
+.product-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.product-btn1 {
+  background-color: var(--surface);
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.product-btn2 {
+  background-color: var(--surface);
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+  min-height: 80vh;
+}
+
+.product-detail-container>div {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  gap: 50px;
+  align-items: center;
+}
+
+.product-detail-container img {
+  flex: 1;
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+
+.product-detail-container div:last-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+}
+
+.product-detail-container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.product-detail-container p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.product-detail-container h2 {
+  font-size: 36px;
+  color: #ff6000;
+  margin-bottom: 30px;
+}
+
+.product-detail-container button {
+  width: fit-content;
+  padding: 15px 40px;
+  background-color: #ff6000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.product-detail-container button:hover {
+  transform: scale(1.02);
 }
