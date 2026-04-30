@@ -11,6 +11,7 @@ import { setDrawer, calculateBasketTotal, removeFromBasket } from './redux/slice
 
 function App() {
   const [theme, setTheme] = useState('dark')
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -29,10 +30,15 @@ function App() {
 
   return (
     <div className='app-shell'>
-      <Header theme={theme} onThemeToggle={handleThemeToggle} />
+      <Header
+        theme={theme}
+        onThemeToggle={handleThemeToggle}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
       <main className='main-content'>
         <Routes>
-          <Route path="/" element={<ProductList />} />
+          <Route path="/" element={<ProductList searchQuery={searchQuery} />} />
           <Route path="/ProductDetail/:id" element={<ProductDetail />} />
         </Routes>
         <Drawer anchor='right' open={drawer} onClose={() => dispatch(setDrawer())}>
