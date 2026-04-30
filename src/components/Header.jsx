@@ -1,12 +1,19 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
 import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { MdNightlightRound } from "react-icons/md";
 import style from './../../node_modules/dom-helpers/esm/css';
 import Badge from '@mui/material/Badge';
+import { useDispatch } from 'react-redux';
+import { setDrawer } from '../redux/slices/basketSlice';
 
 function Header({ theme, onThemeToggle }) {
+
+    const { products, drawer } = useSelector((store) => store.basket);
+    const dispatch = useDispatch();
+
     return (
         <div>
             <div className='header-hero'>
@@ -17,7 +24,7 @@ function Header({ theme, onThemeToggle }) {
                         <input className='search-input' type="text" placeholder='Ürün, marka veya kategori ara' />
                     </form>
                     <div>
-                        <Badge badgeContent={4} color="primary">
+                        <Badge onClick={() => dispatch(setDrawer())} badgeContent={products.length} style={{ cursor: 'pointer' }} color="primary">
                             <IoCartOutline className='cart-icon' />
                         </Badge>
                     </div>
